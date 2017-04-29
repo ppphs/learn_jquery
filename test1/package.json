@@ -1,0 +1,14 @@
+{
+  "name": "test1",
+  "version": "1.0.0",
+  "description": "备忘录",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ppp",
+  "license": "ISC",
+  "dependencies": {
+    "jquery-datetimepicker": "^2.5.4"
+  }
+}
