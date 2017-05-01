@@ -125,7 +125,7 @@
       dataObj.content = $input.val();
       dataObj.date = $get_date.val();
       dataObj.complete = item.complete;
-      dataObj.has_reminded = item.has_reminded;
+      dataObj.has_reminded = false;
       updata_content(index, dataObj);
       $task_detail_mask.fadeOut();
       $task_detail.fadeOut();
@@ -140,11 +140,11 @@
       $detail_content.show();
       $input.hide();
     });
-    $data_picker.on('blur', function (e) {
-      console.log('item.has_reminded', item.has_reminded);
-      item.has_reminded = false;
-      reflash_localStroage();
-    });
+    /**不能在on blur的事件更改has_reminded因为更改的不是新提交时间的has_reminded 要在on submit事件更改*/
+    // $data_picker.on('blur', function (e) {
+    //   item.has_reminded = false;
+    //   reflash_localStroage();
+    // });
   }
 
   function updata_content (index, dataObj) {
@@ -223,9 +223,9 @@
   function notify (content, item) {
     $notify.fadeIn();
     var htmltpl =
-      '<div>时间到啦！</div>' +
+      "时间到啦！" +
       '<div class="notify-content">' + content + '</div>' + 
-      '<div class="know">知道啦</div>';
+      '<button type="button" class="know">知道啦</button>';
     $notify.html(htmltpl);
     var $know = $('.know');
     $know.on('click', function (e) {

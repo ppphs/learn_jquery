@@ -263,8 +263,22 @@ body {
   position: absolute;
   top: 154px;
   left: 1025px;
-  height: 15%;
+  height: 19%;
   width: 25%;
   background: #5cffe2;
   border-radius: 3px;
+  text-align: center;
+  color: #000;
 }
+
+.notify-content {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.know {
+  position: relative;
+  top: 3px;
+  cursor: pointer;
+}
+
