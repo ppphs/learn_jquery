@@ -10,10 +10,16 @@
       $detail_form,
       $task_item,
       $checkbox,
-      $notify = $('.notify');
+      $notify = $('.notify'),
+      $alerter = $('.alert-music'),
+      $my_alert = $('.my-alert'),
+      $alert_mask = $('.alert-mask'),
+      $yes_delete = $('.yes-delete'),
+      $no_delete = $('.no-delete');
 
   init_task();
 
+  /**这里放的是html里面写好的标签元素的事件 */
   $form_add_task.on('submit', function (e) { //如果添加了新的属性这里的new_task也要添加一条新的属性
     var input_content,
         result;
@@ -37,14 +43,42 @@
     input_content.val(null);
   });
 
+  function my_alerter (msg) { //自定义alert
+    var dfd = $.Deferred();
+    var $cnt_div = $('.alert-content');
+    var timer,
+        confirmed;
+    $cnt_div.html(msg);
+    $my_alert.show();
+    $alert_mask.show();
+    timer = setInterval(function () {
+      if (confirmed !== undefined) {
+        dfd.resolve(confirmed);
+        clearInterval(timer);
+        $my_alert.hide();
+        $alert_mask.hide();
+      }
+    }, 50);
+    $yes_delete.on('click', function (e) {
+      confirmed = true;
+    });
+    $no_delete.on('click', function (e) {
+      confirmed = false;
+    });
+    return dfd.promise();
+  }
+
   //查找并监听所有任务列表的删除点击事件
   function add_item_listen () {
     $delete_task_trigger.on('click', function (e) {
       var $this = $(this);
       var $item = $this.parent().parent();
       var index = $item.data('index');
-      var tmp = confirm("确认删除吗？");
-      tmp ? delete_task(index) : null;
+      // var tmp = confirm("确认删除吗？");
+      // tmp ? delete_task(index) : null;
+      my_alerter('确定要删除吗？').then(function (result) {
+        result ? delete_task(index) : null;
+      });
     });
     $detail_task_trigger.on('click', function (e) {
       var $this = $(this);
@@ -221,6 +255,9 @@
   }
 
   function notify (content, item) {
+    item.has_reminded = true;
+    reflash_localStroage();
+    $alerter.get(0).play();
     $notify.fadeIn();
     var htmltpl =
       "时间到啦！" +
@@ -230,8 +267,8 @@
     var $know = $('.know');
     $know.on('click', function (e) {
       $notify.fadeOut();
-      item.has_reminded = true;
-      reflash_localStroage();
+      // item.has_reminded = true; //不能写在onClick事件里面因为这样就会一直执行setInterval方法
+      // reflash_localStroage();
     });
     // console.log("时间到");
   }
@@ -245,6 +282,7 @@
     reflash_localStroage();
     init_task(); 
   }
+
 /**
  * 这段代码是为了在页面已经给用户使用但是又有对象有新的属性要加入，好维护些
  */
