@@ -266,11 +266,11 @@ body {
 
 .notify {
   display: none;
-  position: absolute;
-  top: 154px;
-  left: 1025px;
-  height: 19%;
-  width: 25%;
+  position: fixed;
+  top: 106px;
+  right: 55px;
+  height: 120px;
+  width: 223px;
   background: #5cffe2;
   border-radius: 3px;
   text-align: center;
