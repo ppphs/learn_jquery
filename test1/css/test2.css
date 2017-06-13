@@ -133,7 +133,7 @@ button:hover {
 }
 
 .task-item {
-  padding: 10px;
+  padding: 0 10px;
   background: #fff;
   color: #333;
   margin-bottom: 2px;
@@ -209,6 +209,12 @@ button:hover {
   -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
+}
+
+.task-item > span {
+  display: inline-block;
+  height: 35px;
+  line-height: 35px;
 }
 
 .task-detail-mask {
