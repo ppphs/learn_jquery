@@ -227,7 +227,7 @@ input[name="content-in-detail"] {
 .detail-button {
   height: 31px;
   width: 55px;
-  color: #000c;
+  color: #000;
 }
 
 .detail-button:hover {
@@ -295,12 +295,16 @@ body {
   left: 50%;
   transform: translate(-50%, -30%);
   text-align: center;
-  font-size: 28px;
+  font-size: 0;
   border-radius: 3px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
   display: none;
+}
+
+.alert-content {
+  font-size: 28px;
 }
 
 .my-alert button {
